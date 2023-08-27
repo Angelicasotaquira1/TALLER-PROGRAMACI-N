@@ -1,0 +1,65 @@
+/*
+9.1. Un método de ordenamiento muy simple, pero no muy eficiente, de elementos x1, x2, x3, ... xn en
+orden ascendente es el siguiente:
+Paso 1. Localizar el elemento más pequeño de la lista x1 a xn: intercambiarlo con x1.
+Paso 2. Localizar el elemento más pequeño de la lista x2 a xn; intercambiarlo con x2.
+Paso 3: Localizar el elemento más pequeño de la lista x3 a xn; intercambiarlo con xn.
+En el último paso, los dos últimos elementos se comparan e intercambian, si es necesario y la
+ordenación se termina. Escribir un programa para ordenar una lista de elementos, siguiendo este
+método.
+
+*/
+package ejercicio.pkg1;
+import java.util.Scanner;
+/**
+* @author Maria Angelica Sotaquira Vergara 
+*/
+public class Ejercicio1 
+{
+    public static Scanner y= new Scanner(System.in);
+    public static void main(String[] args) 
+{
+    float x[]=new float [100];
+    float media = 0, aux;
+    int n, j, pos;
+    
+    System.out.println("Ingrese la dimension impar del vector");
+    n = y.nextInt();
+    if (n%2 != 0)
+    {
+        {
+            for(j=1; j<=n;j=j+1)
+            {
+                System.out.println("Ingrese el valor " + (j) + ":");
+                x[j] = y.nextFloat();
+            }
+        }
+        for(j=1;j<=n;j++)
+        {
+            media += x[j];
+        }
+        media = media/n;
+        
+        System.out.println("La media del vector es: " + media + "\n");
+    }
+    for (j=0; j<=n; j++)
+    {
+        pos = j;
+        aux = x[j];
+        
+        while((pos>0)&&(x[pos-1] > aux))
+        {
+            x[pos] = x[pos-1];
+            pos--;
+        }
+        x[pos] = aux;
+    }
+    System.out.println("Orden Ascanedente: ");
+    for (j=1; j<=n;j++)
+    {
+        System.out.print(x[j]+" - ");
+    }
+    System.out.println("");
+}
+    
+}
