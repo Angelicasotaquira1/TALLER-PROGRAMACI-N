@@ -21,7 +21,7 @@ public class Comparacion {
             B[i] = rand.nextInt(2000);
         }
 
-        long TInicio= System.nanoTime();
+        long Inicio= System.nanoTime();
         int ContaSecuencial = 0;
         for (int i = 0; i < M; i++) {
             int x = B[i];
@@ -32,10 +32,10 @@ public class Comparacion {
                 }
             }
         }
-        long TFin = System.nanoTime();
-        long TSecuencial= TFin - TInicio;
+        long Fin = System.nanoTime();
+        long TSecuencial= Fin - Inicio;
 
-        TInicio = System.nanoTime();
+        Inicio = System.nanoTime();
         int ContaBinario = 0;
         for (int i = 0; i < M; i++) {
             int x = B[i];
@@ -53,8 +53,8 @@ public class Comparacion {
                 }
             }
         }
-        TFin = System.nanoTime();
-        long TBinario = TFin - TInicio;
+        Fin = System.nanoTime();
+        long TBinario = TFin - Inicio;
 
         System.out.printf("Busqueda secuencial encontro %d elementos en %.2f ms%n", ContaSecuencial, TSecuencial / 1e6);
         System.out.printf("Busqueda binaria encontro %d elementos en %.2f ms%n", ContaBinario, TBinario / 1e6);
