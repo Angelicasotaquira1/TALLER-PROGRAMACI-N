@@ -1,0 +1,89 @@
+/*
+ * Punto 9.3.
+ */
+package ejercicio.pkg1;
+
+import java.util.Scanner;
+/**
+*
+* @author Maria Angelica Sotaquira Vergara
+*/
+public class NotasAnalisis {
+    public static void main(String[] args) 
+    {
+        final int N = 10; 
+        final int M = 5; 
+        int[][] notas = new int[N][M];
+
+        Scanner input = new Scanner(System.in);
+        for (int i = 0; i < N; i++) 
+        {
+            System.out.printf("Ingrese las notas del estudiante %d: ", i+1);
+            for (int j = 0; j < M; j++) 
+            {
+                notas[i][j] = input.nextInt();
+            }
+        }
+
+        double[] PromEstu = new double[N];
+        double[] PromAsig= new double[M];
+        for (int i = 0; i < N; i++) 
+        {
+            for (int j = 0; j < M; j++) 
+            {
+                PromEstu[i] += notas[i][j];
+                PromAsig[j] += notas[i][j];
+            }
+            PromEstu[i] /= M;
+        }
+        for (int j = 0; j < M; j++) 
+        {
+            PromAsig[j] /= N;
+        }
+
+        double PromTotal = 0.0;
+        for (int i = 0; i < N; i++) 
+        {
+            PromTotal += PromEstu[i];
+        }
+        PromTotal /= N;
+
+        int[] indices = new int[N];
+        for (int i = 0; i < N; i++) 
+        {
+            indices[i] = i;
+        }
+        for (int gap = N/2; gap > 0; gap /= 2) 
+        {
+            for (int i = gap; i < N; i++) 
+            {
+                int temp = indices[i];
+                double tempGrade = PromEstu[temp];
+                int j;
+                for (j = i; j >= gap && PromEstu[indices[j-gap]] < tempGrade; j -= gap) 
+                {
+                    indices[j] = indices[j-gap];
+                }
+                indices[j] = temp;
+            }
+        }
+
+        System.out.printf("\nMedia de cada estudiante:%n");
+        for (int i = 0; i < N; i++) 
+        {
+            System.out.printf("Estudiante %d: %.2f%n", i+1,PromEstu[i]);
+        }
+        System.out.printf("\nMedia de cada asignatura:%n");
+        for (int j = 0; j < M; j++) 
+        {
+            System.out.printf("Materia %d: %.2f%n", j+1, PromAsig[j]);
+        }
+        System.out.printf("\nMedia Total: %.2f%n", PromTotal);
+        System.out.printf("\nEstudiantes organizados en orden decreciente:%n");
+        for (int i = 0; i < N; i++) 
+        {
+            int index = indices[i];
+            System.out.printf("Estudiante %d: %.2f%n", index+1, PromEstu[index]);
+        }
+    }
+}
