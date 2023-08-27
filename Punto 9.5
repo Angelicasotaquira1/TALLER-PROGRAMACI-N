@@ -1,0 +1,62 @@
+import java.util.Arrays;
+import java.util.Random;
+/**
+ *
+ * @author Maria Angelica Sotaquira Veragara - 1804271
+ */
+public class Comparacion {
+    public static void main(String[] args) {
+        final int N = 2000; 
+        final int M = 500; 
+        int[] A = new int[N];
+        int[] B = new int[M];
+
+        Random rand = new Random();
+        for (int i = 0; i < N; i++) {
+            A[i] = rand.nextInt(2000);
+        }
+        Arrays.sort(A);
+
+        for (int i = 0; i < M; i++) {
+            B[i] = rand.nextInt(2000);
+        }
+
+        long TInicio= System.nanoTime();
+        int ContaSecuencial = 0;
+        for (int i = 0; i < M; i++) {
+            int x = B[i];
+            for (int j = 0; j < N; j++) {
+                if (A[j] == x) {
+                    ContaSecuencial++;
+                    break;
+                }
+            }
+        }
+        long TFin = System.nanoTime();
+        long TSecuencial= TFin - TInicio;
+
+        TInicio = System.nanoTime();
+        int ContaBinario = 0;
+        for (int i = 0; i < M; i++) {
+            int x = B[i];
+            int lo = 0;
+            int hi = N - 1;
+            while (lo <= hi) {
+                int mid = lo + (hi - lo) / 2;
+                if (A[mid] == x) {
+                    ContaBinario++;
+                    break;
+                } else if (A[mid] < x) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid - 1;
+                }
+            }
+        }
+        TFin = System.nanoTime();
+        long TBinario = TFin - TInicio;
+
+        System.out.printf("Busqueda secuencial encontro %d elementos en %.2f ms%n", ContaSecuencial, TSecuencial / 1e6);
+        System.out.printf("Busqueda binaria encontro %d elementos en %.2f ms%n", ContaBinario, TBinario / 1e6);
+    }
+}
