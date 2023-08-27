@@ -10,56 +10,54 @@ método.
 
 */
 package ejercicio.pkg1;
+import javax.swing.JOptionPane;
 import java.util.Scanner;
 /**
-* @author Maria Angelica Sotaquira Vergara 
+*
+* @author Maria Angelica Sotaquira Vergara
 */
-public class Ejercicio1 
+public class Ejercicio1Taller 
 {
-    public static Scanner y= new Scanner(System.in);
     public static void main(String[] args) 
-{
-    float x[]=new float [100];
-    float media = 0, aux;
-    int n, j, pos;
-    
-    System.out.println("Ingrese la dimension impar del vector");
-    n = y.nextInt();
-    if (n%2 != 0)
     {
+        Scanner x=new Scanner(System.in);
+        int vector[],n, menor,pos,aux;n = Integer.parseInt(JOptionPane.showInputDialog("Digite el numero del arreglo: "));
+        vector= new int [n];
+        System.out.println("\t---ARREGLO---\n");
+        
+        for (int i=0; i <n; i++)
         {
-            for(j=1; j<=n;j=j+1)
+            System.out.print((i+1)+")" + " Digite un numero: ");
+            vector[i] = x.nextInt();
+        }
+        for(int i=0;i<vector.length-1;i++)
+        {
+            menor=vector[i];
+            pos=i;
+            for(int j=i+1;j<vector.length;j++)
             {
-                System.out.println("Ingrese el valor " + (j) + ":");
-                x[j] = y.nextFloat();
+                if(vector[j]<menor)
+                {
+                    menor=vector[j];
+                    pos=j;
+                }
+            }
+            if(pos!=i)
+            {
+                aux=vector[i];
+                vector[i]=vector[pos];
+                vector[pos]=aux;
             }
         }
-        for(j=1;j<=n;j++)
+        System.out.println("Numeros ordenados de manera acendente: \n");
+        for(int i=0;i<vector.length;i++)
         {
-            media += x[j];
+            System.out.print("\t" + vector[i]+" - ");
         }
-        media = media/n;
-        
-        System.out.println("La media del vector es: " + media + "\n");
-    }
-    for (j=0; j<=n; j++)
-    {
-        pos = j;
-        aux = x[j];
-        
-        while((pos>0)&&(x[pos-1] > aux))
+        System.out.println("\nNumeros ordenados de manera decendente: \n");
+        for(int i=vector.length-1;i>=0;i--)
         {
-            x[pos] = x[pos-1];
-            pos--;
+            System.out.print("\t" + vector[i]+" - ");
         }
-        x[pos] = aux;
     }
-    System.out.println("Orden Ascanedente: ");
-    for (j=1; j<=n;j++)
-    {
-        System.out.print(x[j]+" - ");
-    }
-    System.out.println("");
-}
-    
 }
